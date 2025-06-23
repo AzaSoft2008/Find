@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Угадай число</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #8e44ad, #3498db);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 50px;
+        }
+
+        .game-container {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            width: 60%;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <h1>Угадай число от 1 до 100</h1>
+        <input type="number" id="guessInput" placeholder="Введите число" />
+        <button onclick="checkGuess()">Проверить</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('guessInput').value);
+            const message = document.getElementById('message');
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                message.textContent = 'Введите число от 1 до 100.';
+                message.style.color = 'yellow';
+                return;
+            }
+
+            attempts++;
+
+            if (guess === randomNumber) {
+                message.textContent = `Поздравляю! Вы угадали число ${randomNumber} за ${attempts} попыток.`;
+                message.style.color = 'lightgreen';
+            } else if (guess < randomNumber) {
+                message.textContent = 'Слишком маленькое число!';
+                message.style.color = 'orange';
+            } else {
+                message.textContent = 'Слишком большое число!';
+                message.style.color = 'orange';
+            }
+        }
+    </script>
+</body>
+
+</html>
